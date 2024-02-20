@@ -8,7 +8,6 @@
           h-36 w-36
         "
         color="gray"
-        @click="useTo().navigateToSSL(item.to)"
       >
         <UiText size="2xl" color="primary" weight="bold">ANB</UiText>
         <UiText size="sm">{{ state.anb }} Game</UiText>
@@ -21,7 +20,6 @@
           h-36 w-36
         "
         color="gray"
-        @click="useTo().navigateToSSL(item.to)"
       >
         <UiText size="2xl" color="primary" weight="bold">CVV</UiText>
         <UiText size="sm">{{ state.cvv }} Game</UiText>
@@ -34,7 +32,6 @@
           h-36 w-36
         "
         color="gray"
-        @click="useTo().navigateToSSL(item.to)"
       >
         <UiText size="2xl" color="primary" weight="bold">ZUZU</UiText>
         <UiText size="sm">{{ state.zuzu }} Game</UiText>
