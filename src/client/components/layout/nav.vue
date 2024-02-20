@@ -1,0 +1,3 @@
+<template>
+  <LayoutMenu></LayoutMenu>
+</template>
