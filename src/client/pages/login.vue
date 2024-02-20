@@ -27,6 +27,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'login'
+})
+
 const loading = ref(false)
 
 const state = ref({

@@ -61,15 +61,12 @@ const type = computed(() => {
 const getFast = async () => {
   try {
     loading.value = true
-    const { data } = await useFetch(props.game.url+'/api/statistic/fast', {
-      method: 'POST',
-      body: { 
-        type: type.value,
-        secret: props.game.secret
-      }
+    const data = await useAPI('statistic/fast', {
+      type: type.value,
+      game: props.game._id
     })
 
-    fast.value = data.value
+    fast.value = data
     loading.value = false
   }
   catch {

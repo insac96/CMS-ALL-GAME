@@ -1,7 +1,7 @@
 <template>
   <div v-if="!!game">
     <UiFlex>
-      <UiFlex type="col" items="start" class="mr-auto">
+      <UiFlex type="col" items="start" class="mr-auto cursor-pointer" @click="openLink">
         <UiText class="mr-auto" weight="semibold" color="primary">{{ game.name }}</UiText>
         <UiText color="gray" size="xs">{{ game.url }}</UiText>
       </UiFlex>
@@ -10,7 +10,7 @@
       <UButton color="red" icon="i-bx-trash" @click="del">Xóa</UButton>
     </UiFlex>
 
-    <div class="mt-4">
+    <div class="mt-4" v-if="game">
       <StatisticFast :key="reloadStore.state" :game="game" class="mb-4"/>
 
       <UiFlex class="mb-2">
@@ -44,6 +44,8 @@ const tabs = [
 ]
 
 watch(() => reloadStore.state, () => get())
+
+const openLink = () => window.open(game.value.url, '_blank')
 
 const del = async () => {
   try {

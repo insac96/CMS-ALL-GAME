@@ -3,8 +3,8 @@
     <UiFlex class="mb-2">
       <USelectMenu v-model="page.size" :options="[5,10,20,50,100]" size="sm" class="mr-auto"/>
     
-      <SelectDate v-model="page.range.start" placeholder="Bắt đầu" size="sm" class="ml-2 max-w-[140px]"/>
-      <SelectDate v-model="page.range.end" placeholder="Kết thúc" size="sm" class="ml-1 max-w-[140px]"/>
+      <UiDate v-model="page.range.start" placeholder="Bắt đầu" size="sm" class="ml-2 max-w-[140px]"/>
+      <UiDate v-model="page.range.end" placeholder="Kết thúc" size="sm" class="ml-1 max-w-[140px]"/>
     </UiFlex>
     
     <!-- Table -->
@@ -67,7 +67,7 @@ const page = ref({
     end: null
   },
   total: 0,
-  secret: props.game.secret
+  game: props.game._id
 })
 watch(() => page.value.size, () => getList())
 watch(() => page.value.current, () => getList())
@@ -92,15 +92,11 @@ const loading = ref({
 const getList = async () => {
   try {
     loading.value.load = true
-    
-    const { data } = await useFetch(props.game.url+'/api/statistic/signup', {
-      method: 'POST',
-      body: JSON.parse(JSON.stringify(page.value))
-    })
+    const data = await useAPI('statistic/signup', JSON.parse(JSON.stringify(page.value)))
 
     loading.value.load = false
-    list.value = data.value.list
-    page.value.total = data.value.total
+    list.value = data.list
+    page.value.total = data.total
   }
   catch (e) {
     loading.value.load = false

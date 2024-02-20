@@ -6,9 +6,9 @@
     px-4
   ">
     <UiFlex class="h-[var(--header-size)] max-h-[var(--header-size)]">
-      <UiIcon name="i-bx-menu-alt-left" size="6" class="mr-4 md:!hidden" pointer @click="open = true" />
+      <UiIcon name="i-bx-menu-alt-left" size="6" class="mr-4 xl:!hidden" pointer @click="open = true" />
 
-      <UiFlex type="col" items="start" >
+      <UiFlex type="col" items="start" class="cursor-pointer" @click="navigateTo('/')">
         <UiText weight="semibold" color="primary">Admin Center</UiText>
         <UiText color="gray" size="xs">Xin chào quản trị viên</UiText>
       </UiFlex>
@@ -17,13 +17,26 @@
     </UiFlex>
   </header>
 
-  <USlideover v-model="open" side="left">
-    <div class="p-4 flex-1">
-      <LayoutMenu></LayoutMenu>
-    </div>
-  </USlideover>
+  <USlideover v-model="open" side="left" :ui="{
+    width: 'w-screen max-w-xs'
+  }">
+    <UCard 
+      class="flex flex-col flex-1 w-full" 
+      :ui="{ 
+        base: 'overflow-y-auto',
+        body: { base: 'grow overflow-y-auto' },
+        ring: '', 
+        divide: 'divide-y divide-gray-100 dark:divide-gray-800'
+      }"
+    >
+      <UiFlex type="col" items="start" class="cursor-pointer mb-4" @click="navigateTo('/')">
+        <UiText weight="semibold" color="primary">Admin Center</UiText>
+        <UiText color="gray" size="xs">Xin chào quản trị viên</UiText>
+      </UiFlex>
 
-  
+      <LayoutMenu></LayoutMenu>
+    </UCard>
+  </USlideover>
 </template>
 
 <script setup>

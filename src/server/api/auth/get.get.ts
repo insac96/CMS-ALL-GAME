@@ -11,6 +11,6 @@ export default defineEventHandler(async (event) => {
     return resp(event, { result: true })
   } 
   catch (e:any) {
-    return resp(event, { code: 500, message: e.toString() })
+    return resp(event, { code: 401, message: e.toString() })
   }
 })
