@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     if(md5(password) != admin.password) throw 'Mật khẩu không chính xác'
 
     // Cookie
-    setCookie(event, 'token-auth', md5(password), runtimeConfig.public.cookieConfig)
+    setCookie(event, 'token-auth', `${admin.username}-${md5(password)}`, runtimeConfig.public.cookieConfig)
 
     return resp(event, { message: 'Đăng nhập thành công' })
   } 

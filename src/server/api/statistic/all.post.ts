@@ -1,5 +1,3 @@
-import { IDBGame } from "~~/types"
-
 export default defineEventHandler(async (event) => {
   try {
     const auth = await getAuth(event)

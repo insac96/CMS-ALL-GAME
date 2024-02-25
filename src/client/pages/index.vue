@@ -1,11 +1,6 @@
 <template>
   <div class="p-4">
-    <UAccordion
-      color="gray"
-      variant="ghost"
-      size="sm"
-      :items="menu"
-    >
+    <UAccordion color="gray" :items="menu" multiple>
       <template #[i.slot] v-for="i in menu" :key="i.slot">
         <StatisticFast :company="i.slot"></StatisticFast>
       </template>

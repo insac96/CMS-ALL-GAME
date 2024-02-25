@@ -1,45 +1,43 @@
 <template>
-  <div>
-    <UButton icon="i-bx-plus" @click="open = true">Thêm</UButton>
+  <UButton icon="i-bx-plus" @click="open = true">Thêm</UButton>
 
-    <UModal v-model="open">
-      <UForm :state="state" @submit="submit" class="p-4">
-        <UFormGroup label="Công ty">
-          <USelectMenu 
-            v-model="state.type" 
-            size="lg" 
-            value-attribute="value"
-            :options="[
-              { label: 'ANB Studio', value: 'ANB' },
-              { label: 'CVV Studio', value: 'CVV' },
-              { label: 'ZUZU Game', value: 'ZUZU' },
-            ]"
-          >
-            <template #label>
-              <span v-if="!state.type">Bấm để chọn</span>
-              <span v-else>{{ state.type }}</span>
-            </template>
-          </USelectMenu>
-        </UFormGroup>
+  <UModal v-model="open">
+    <UForm :state="state" @submit="submit" class="p-4">
+      <UFormGroup label="Công ty">
+        <USelectMenu 
+          v-model="state.type" 
+          size="lg" 
+          value-attribute="value"
+          :options="[
+            { label: 'ANB Studio', value: 'ANB' },
+            { label: 'CVV Studio', value: 'CVV' },
+            { label: 'ZUZU Game', value: 'ZUZU' },
+          ]"
+        >
+          <template #label>
+            <span v-if="!state.type">Bấm để chọn</span>
+            <span v-else>{{ state.type }}</span>
+          </template>
+        </USelectMenu>
+      </UFormGroup>
 
-        <UFormGroup label="Tên trò chơi">
-          <UInput v-model="state.name"></UInput>
-        </UFormGroup>
+      <UFormGroup label="Tên trò chơi">
+        <UInput v-model="state.name"></UInput>
+      </UFormGroup>
 
-        <UFormGroup label="Khóa bí mật">
-          <UInput v-model="state.secret"></UInput>
-        </UFormGroup>
+      <UFormGroup label="Khóa bí mật">
+        <UInput v-model="state.secret"></UInput>
+      </UFormGroup>
 
-        <UFormGroup label="Đường dẫn">
-          <UInput v-model="state.url"></UInput>
-        </UFormGroup>
+      <UFormGroup label="Đường dẫn">
+        <UInput v-model="state.url"></UInput>
+      </UFormGroup>
 
-        <UiFlex justify="end">
-          <UButton type="submit" :loading="loading">Thêm</UButton>
-        </UiFlex>
-      </UForm>
-    </UModal>
-  </div>
+      <UiFlex justify="end">
+        <UButton type="submit" :loading="loading">Thêm</UButton>
+      </UiFlex>
+    </UForm>
+  </UModal>
 </template>
 
 <script setup>

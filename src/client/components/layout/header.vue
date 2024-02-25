@@ -8,12 +8,13 @@
     <UiFlex class="h-[var(--header-size)] max-h-[var(--header-size)]">
       <UiIcon name="i-bx-menu-alt-left" size="6" class="mr-4 xl:!hidden" pointer @click="open = true" />
 
-      <UiFlex type="col" items="start" class="cursor-pointer" @click="navigateTo('/')">
+      <UiFlex type="col" items="start" class="cursor-pointer mr-auto" @click="navigateTo('/')">
         <UiText weight="semibold" color="primary">Admin Center</UiText>
-        <UiText color="gray" size="xs">Xin chào quản trị viên</UiText>
+        <UiText color="gray" size="xs">Xin chào {{ authStore.profile.username }}</UiText>
       </UiFlex>
 
-      <GameAdd class="ml-auto" />
+      <GameAdd />
+      <UButton icon="i-bx-power-off" color="red" class="ml-1" @click="logout"></UButton>
     </UiFlex>
   </header>
 
@@ -40,7 +41,14 @@
 </template>
 
 <script setup>
+const authStore = useAuthStore()
 const open = ref(false)
+
+const logout = () => {
+  const token = useCookie('token-auth')
+  token.value = null
+  navigateTo('/login')
+}
 </script>
 
 <style>

@@ -7,7 +7,7 @@
       </UiFlex>
 
       <GameEdit :game="game" class="mx-1">Sửa</GameEdit>
-      <UButton color="red" icon="i-bx-trash" @click="del">Xóa</UButton>
+      <UButton color="gray" icon="i-bx-trash" @click="del">Xóa</UButton>
     </UiFlex>
 
     <div class="w-full grow">

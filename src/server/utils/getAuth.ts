@@ -8,7 +8,9 @@ export default async (event: H3Event, throwError : boolean = true) : Promise<IAu
     const token = getCookie(event, 'token-auth')
     if(!token) throw 'Vui lòng đăng nhập trước'
 
-    const admin = await DB.Admin.findOne({ password: token }) as IDBAdmin
+    const arr = token.split('-')
+
+    const admin = await DB.Admin.findOne({ username: arr[0], password: arr[1] }) as IDBAdmin
     if(!admin) throw 'Xác thực tài khoản không thành công'
 
     const result = { 
