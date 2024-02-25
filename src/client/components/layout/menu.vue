@@ -20,8 +20,7 @@
 </template>
 
 <script setup>
-import { watch } from 'vue';
-
+const authStore = useAuthStore()
 const reloadStore = useReloadStore()
 
 const emits = defineEmits(['to'])
@@ -40,19 +39,37 @@ const getList = async () => {
       { label: 'ZUZU Game', slot: 'ZUZU', children: []}
     ]
 
+    const mCVV = [
+      { label: 'CVV Studio', slot: 'CVV', children: []},
+    ]
+
+    const mANB = [
+      { label: 'ANB Studio', slot: 'ANB', children: []},
+    ]
+
     data.forEach(i => {
       if(i.type == 'ANB'){
         m[0].children.push({ label: i.name, to: `/game/${i._id}` })
       }
       if(i.type == 'CVV'){
         m[1].children.push({ label: i.name, to: `/game/${i._id}` })
+        mCVV[0].children.push({ label: i.name, to: `/game/${i._id}` })
       }
       if(i.type == 'ZUZU'){
         m[2].children.push({ label: i.name, to: `/game/${i._id}` })
+        mANB[0].children.push({ label: i.name, to: `/game/${i._id}` })
       }
     })
 
-    menu.value = m
+    if(authStore.profile.company == 'CVV'){
+      menu.value = mCVV
+    }
+    else if(authStore.profile.company == 'ANB'){
+      menu.value = mANB
+    }
+    else {
+      menu.value = m
+    }
   }
   catch(e){
     return

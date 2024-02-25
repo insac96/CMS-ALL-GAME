@@ -4,12 +4,10 @@ export default defineNuxtRouteMiddleware(async () => {
   const token = useCookie('token-auth', runtimeConfig.public.cookieConfig)
   
   try{
-    if(!token.value) throw 'Không tìm thấy mã quản trị viên'
-    await useAPI('auth/get')
-    setAuth()
+    const data = await useAPI('auth/get')
+    setAuth(data)
   }
   catch(e){
-    console.log(e)
     token.value = null
     return navigateTo('/login')
   }

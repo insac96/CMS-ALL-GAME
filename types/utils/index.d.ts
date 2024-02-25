@@ -3,3 +3,8 @@ export interface IResp {
   message?: string
   result?: any
 }
+
+export interface IAuth {
+  username? : string
+  company?: string
+}

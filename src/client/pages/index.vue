@@ -1,6 +1,6 @@
 <template>
-  <UiFlex class="w-full h-full" justify="center">
-    <UiFlex class="gap-3" justify="center" wrap>
+  <div>
+    <UiFlex class="mb-6 gap-3" justify="center" wrap>
       <UButton 
         size="xl" 
         class="
@@ -37,7 +37,7 @@
         <UiText size="sm">{{ state.zuzu }} Game</UiText>
       </UButton>
     </UiFlex>
-  </UiFlex>
+  </div>
 </template>
 
 <script setup>

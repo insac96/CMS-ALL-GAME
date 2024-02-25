@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!!game">
-    <UiFlex>
+  <UiFlex type="col" class="h-full" v-if="!!game">
+    <UiFlex class="w-full py-2 px-4">
       <UiFlex type="col" items="start" class="mr-auto cursor-pointer" @click="openLink">
         <UiText class="mr-auto" weight="semibold" color="primary">{{ game.name }}</UiText>
         <UiText color="gray" size="xs">{{ game.url }}</UiText>
@@ -10,18 +10,10 @@
       <UButton color="red" icon="i-bx-trash" @click="del">Xóa</UButton>
     </UiFlex>
 
-    <div class="mt-4" v-if="game">
-      <StatisticFast :key="reloadStore.state" :game="game" class="mb-4"/>
-
-      <UiFlex class="mb-2">
-        <UTabs v-model="tab" :items="tabs"></UTabs>
-      </UiFlex>
-
-      <StatisticPayment :key="reloadStore.state" :game="game" v-if="tab == 0"/>
-      <StatisticSignin :key="reloadStore.state" :game="game" v-if="tab == 1"/>
-      <StatisticSignup :key="reloadStore.state" :game="game" v-if="tab == 2"/>
+    <div class="w-full grow">
+      <iframe :src="`${game.url}/preview/${game.secret}`" width="100%" height="100%" class="overflow-hidden border-0"></iframe>
     </div>
-  </div>
+  </UiFlex>
 </template>
 
 <script setup>
@@ -32,16 +24,7 @@ definePageMeta({
 const reloadStore = useReloadStore()
 const route = useRoute()
 const _id = route.params._id
-
 const game = ref(null)
-
-const tab = ref(0)
-
-const tabs = [
-  { label: 'Nạp tiền', key: 'payment' },
-  { label: 'Đăng nhập', key: 'signin' },
-  { label: 'Đăng ký', key: 'signup' },
-]
 
 watch(() => reloadStore.state, () => get())
 
@@ -52,8 +35,6 @@ const del = async () => {
     await useAPI('game/del', {
       _id: _id
     })
-
-    reloadStore.change()
     navigateTo('/')
   }
   catch (e) {
@@ -66,7 +47,6 @@ const get = async () => {
     const data = await useAPI('game/get', {
       _id: _id
     })
-
     game.value = data
   }
   catch (e) {

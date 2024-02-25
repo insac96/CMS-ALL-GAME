@@ -7,4 +7,5 @@ export interface IDBAdmin {
 
   username: string
   password: string
+  company: string
 }

@@ -16,7 +16,7 @@
         <LayoutNav />
       </div>
       
-      <div class="xl:col-span-10 col-span-12 p-4">
+      <div class="xl:col-span-10 col-span-12">
         <slot></slot>
       </div>
     </div>
