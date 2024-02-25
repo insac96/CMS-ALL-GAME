@@ -44,7 +44,7 @@
 <script setup>
 const { toMoney } = useMoney()
 
-const props = defineProps(['game'])
+const props = defineProps(['company'])
 
 const loading = ref(false)
 const tab = ref(0)
@@ -61,11 +61,8 @@ const type = computed(() => {
 const getFast = async () => {
   try {
     loading.value = true
-    const data = await useAPI('statistic/fast', {
-      type: type.value,
-      game: props.game._id
-    })
-
+    
+    const data = await useAPI('statistic/all', { company: props.company, type: type })
     fast.value = data
     loading.value = false
   }

@@ -17,12 +17,11 @@
 }
 
 :root {
-  --scroll-color: var(--color-gray-800);
-  --scroll-color-hover: var(--color-gray-700);
+  --scroll-color: var(--color-gray-200);
+  --scroll-color-hover: var(--color-gray-300);
 }
 
 html, body, #__nuxt {
-  background: rgb(var(--color-gray-900));
   height: 100%;
   border-style: none;
 }

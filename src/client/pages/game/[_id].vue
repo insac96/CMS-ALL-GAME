@@ -21,37 +21,35 @@ definePageMeta({
   middleware: 'auth'
 })
 
+// State
 const reloadStore = useReloadStore()
 const route = useRoute()
 const _id = route.params._id
 const game = ref(null)
 
+// Watch
 watch(() => reloadStore.state, () => get())
 
+// Action
 const openLink = () => window.open(game.value.url, '_blank')
 
 const del = async () => {
   try {
-    await useAPI('game/del', {
-      _id: _id
-    })
+    await useAPI('game/del', { _id: _id })
     navigateTo('/')
+    setTimeout(() => reloadStore.change(), 500);
   }
-  catch (e) {
-    return
-  }
+  catch (e) { return }
 }
 
 const get = async () => {
   try {
-    const data = await useAPI('game/get', {
-      _id: _id
-    })
+    const data = await useAPI('game/get', { _id: _id })
     game.value = data
   }
-  catch (e) {
-    return
-  }
+  catch (e) { return }
 }
+
+// Load
 get()
 </script>
