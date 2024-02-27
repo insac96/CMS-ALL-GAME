@@ -39,18 +39,24 @@ const getList = async () => {
       { label: 'ZUZU Game', slot: 'ZUZU', count: 0, children: []}
     ]
 
+    const mANB = [
+      { label: 'ANB Studio', slot: 'ANB', count: 0, children: []},
+    ]
+
     const mCVV = [
       { label: 'CVV Studio', slot: 'CVV', count: 0, children: []},
     ]
 
-    const mANB = [
-      { label: 'ANB Studio', slot: 'ANB', count: 0, children: []},
+    const mZUZU = [
+      { label: 'ZUZU Studio', slot: 'ZUZU', count: 0, children: []},
     ]
 
     data.forEach(i => {
       if(i.type == 'ANB'){
         m[0].children.push({ label: i.name, to: `/game/${i._id}` })
         m[0].count =  m[0].count + 1
+        mANB[0].children.push({ label: i.name, to: `/game/${i._id}` })
+        mANB[0].count = mANB[0].count + 1
       }
       if(i.type == 'CVV'){
         m[1].children.push({ label: i.name, to: `/game/${i._id}` })
@@ -61,8 +67,8 @@ const getList = async () => {
       if(i.type == 'ZUZU'){
         m[2].children.push({ label: i.name, to: `/game/${i._id}` })
         m[2].count =  m[2].count + 1
-        mANB[0].children.push({ label: i.name, to: `/game/${i._id}` })
-        mANB[0].count = mANB[0].count + 1
+        mZUZU[0].children.push({ label: i.name, to: `/game/${i._id}` })
+        mZUZU[0].count = mZUZU[0].count + 1
       }
     })
 
@@ -71,6 +77,9 @@ const getList = async () => {
     }
     else if(authStore.profile.company == 'ANB'){
       menu.value = mANB
+    }
+    else if(authStore.profile.company == 'ZUZU'){
+      menu.value = mZUZU
     }
     else {
       menu.value = m

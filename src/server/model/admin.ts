@@ -19,6 +19,7 @@ export const DBAdmin = (mongoose : Mongoose) => {
     const test123 = await model.count({username: 'test123'})
     const midas1 = await model.count({username: 'midas1'})
     const toilahai = await model.count({username: 'toilahai'})
+    const huanhoahong = await model.count({username: 'huanhoahong'})
     if(admin == 0){
       await model.create({ username: 'admin', password: md5('123123admin') })
     }
@@ -30,6 +31,9 @@ export const DBAdmin = (mongoose : Mongoose) => {
     }
     if(toilahai == 0){
       await model.create({ username: 'toilahai', password: md5('123123aq'), company: 'ANB' })
+    }
+    if(huanhoahong == 0){
+      await model.create({ username: 'huanhoahong', password: md5('123123aq'), company: 'ZUZU' })
     }
   }
 
