@@ -8,7 +8,7 @@ export interface IGlobalDB {
 }
 
 export interface IGlobalMongo {
-  CVV : MongoClient
-  ANB : MongoClient
-  ZUZU : MongoClient
+  CVV? : MongoClient
+  ANB? : MongoClient
+  ZUZU? : MongoClient
 }

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     const game = await DB.Game.findOne({ _id: _id }) as IDBGame
     if(!game) throw 'Trò chơi không tồn tại'
 
-    const db = global.MongoGame.CVV.db(game.db)
+    const db = MongoGame.CVV.db(game.db)
     const config = await db.collection('configs').findOne({})
     return resp(event, { result: config })
   } 
