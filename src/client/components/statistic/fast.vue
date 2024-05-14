@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UiFlex class="mb-2">
+    <UiFlex class="mb-0.5">
       <UTabs class="w-full sm:w-auto" v-model="tab" :items="[{ label: 'Ngày' }, { label: 'Tháng' }, { label: 'Tổng' }]" />
     </UiFlex>
     

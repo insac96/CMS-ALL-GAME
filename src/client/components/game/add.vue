@@ -25,8 +25,12 @@
         <UInput v-model="state.name"></UInput>
       </UFormGroup>
 
-      <UFormGroup label="Khóa bí mật">
-        <UInput v-model="state.secret"></UInput>
+      <UFormGroup label="Dữ liệu">
+        <UInput v-model="state.db"></UInput>
+      </UFormGroup>
+
+      <UFormGroup label="Cổng dữ liệu">
+        <UInput v-model="state.port" type="number"></UInput>
       </UFormGroup>
 
       <UFormGroup label="Đường dẫn">
@@ -47,7 +51,8 @@ const loading = ref(false)
 const state = ref({
   type: null,
   name: null,
-  secret: null,
+  db: null,
+  port: null,
   url: null
 })
 
@@ -58,6 +63,9 @@ const submit = async () => {
 
     loading.value = false
     open.value = false
+    state.value.name = null
+    state.value.db = null
+    state.value.name = null
     reloadStore.change()
   }
   catch(e){

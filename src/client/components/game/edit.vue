@@ -26,8 +26,12 @@
           <UInput v-model="state.name"></UInput>
         </UFormGroup>
 
-        <UFormGroup label="Khóa bí mật">
-          <UInput v-model="state.secret"></UInput>
+        <UFormGroup label="Dữ liệu">
+          <UInput v-model="state.db"></UInput>
+        </UFormGroup>
+
+        <UFormGroup label="Cổng dữ liệu">
+          <UInput v-model="state.port" type="number"></UInput>
         </UFormGroup>
 
         <UFormGroup label="Đường dẫn">

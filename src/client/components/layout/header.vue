@@ -13,7 +13,7 @@
         <UiText color="gray" size="xs">Xin chào {{ authStore.profile.username }}</UiText>
       </UiFlex>
 
-      <GameAdd />
+      <GameAdd v-if="authStore.profile.username == 'admin'"/>
       <UButton icon="i-bx-power-off" color="red" class="ml-1" @click="logout"></UButton>
     </UiFlex>
   </header>

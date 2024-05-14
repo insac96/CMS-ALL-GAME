@@ -7,6 +7,7 @@ export interface IDBGame {
 
   type: string
   name: string
-  secret: string
+  db: string
+  port: number
   url: string
 }

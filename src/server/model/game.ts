@@ -5,7 +5,8 @@ export const DBGame = (mongoose : Mongoose) => {
   const schema = new mongoose.Schema<IDBGame>({ 
     type: { type: String },
     name: { type: String },
-    secret: { type: String },
+    db: { type: String },
+    port: { type: Number },
     url: { type: String },
   }, {
     timestamps: true
