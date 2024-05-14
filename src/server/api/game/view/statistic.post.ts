@@ -6,7 +6,9 @@ export default defineEventHandler(async (event) => {
 
     const gameData = await DB.Game.findOne({ _id: game }) as IDBGame
     if(!gameData) throw 'Trò chơi không tồn tại'
-    const db = MongoGame.CVV.db(game.db)
+
+    // @ts-expect-error
+    const db = MongoGame[gameData.type].db(gameData.db)
     const paymentCollection = db.collection('payments')
     const spendCollection = db.collection('spends')
     const userCollection = db.collection('users')
@@ -167,8 +169,6 @@ export default defineEventHandler(async (event) => {
       signin = [{ count: users }]
       signup = [{ count: users }]
     }
-
-    return resp(event, { code: 200, result: {payment, spend, signin, signup} })
 
     // Result
     return resp(event, {
