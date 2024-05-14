@@ -168,6 +168,8 @@ export default defineEventHandler(async (event) => {
       signup = [{ count: users }]
     }
 
+    console.log(payment, spend, signin, signup)
+
     // Result
     return resp(event, {
       result: {
