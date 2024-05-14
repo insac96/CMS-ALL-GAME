@@ -10,8 +10,9 @@ export default defineEventHandler(async (event) => {
     if(!game) throw 'Trò chơi không tồn tại'
 
     const db = MongoGame.CVV.db(game.db)
-    const config = await db.collection('configs').findOne({})
-    return resp(event, { result: config })
+    const config = await db.collection('configs').find()
+    console.log(config)
+    return resp(event, { result: { game, config } })
   } 
   catch (e:any) {
     return resp(event, { code: 500, message: e.toString() })
