@@ -9,8 +9,10 @@
         { label: 'Tổng' }
       ]" />
     </UiFlex>
+
+    {{ data }}
     
-    <div class="grid grid-cols-12 gap-2">
+    <!-- <div class="grid grid-cols-12 gap-2">
       <UCard class="lg:col-span-4 sm:col-span-12 col-span-12" :ui="{ body: { padding: 'px-4 md:px-8 py-6 md:py-8' } }">
         <UiFlex justify="between">
           <UAvatar icon="i-bx-money-withdraw" size="2xl" class="mr-4" />
@@ -76,7 +78,7 @@
           </UiFlex>
         </UiFlex>
       </UCard>
-    </div>
+    </div> -->
   </div>
 </template>
 
