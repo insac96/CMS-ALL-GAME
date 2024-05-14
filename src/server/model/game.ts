@@ -6,7 +6,6 @@ export const DBGame = (mongoose : Mongoose) => {
     type: { type: String },
     name: { type: String },
     db: { type: String },
-    port: { type: Number },
     url: { type: String },
   }, {
     timestamps: true

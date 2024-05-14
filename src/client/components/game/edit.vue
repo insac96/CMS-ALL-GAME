@@ -30,10 +30,6 @@
           <UInput v-model="state.db"></UInput>
         </UFormGroup>
 
-        <UFormGroup label="Cổng dữ liệu">
-          <UInput v-model="state.port" type="number"></UInput>
-        </UFormGroup>
-
         <UFormGroup label="Đường dẫn">
           <UInput v-model="state.url"></UInput>
         </UFormGroup>

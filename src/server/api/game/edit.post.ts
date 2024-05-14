@@ -3,8 +3,8 @@ import { IDBGame } from '~~/types'
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
-    const { _id, type, name, db, port, url } = body
-    if(!_id || !type || !name || !db || !port || !url) throw 'Vui lòng nhập đầy đủ thông tin'
+    const { _id, type, name, db, url } = body
+    if(!_id || !type || !name || !db || !url) throw 'Vui lòng nhập đầy đủ thông tin'
 
     const game = await DB.Game.findOne({ _id: _id }) as IDBGame
     if(!game) throw 'Trò chơi không tồn tại'
