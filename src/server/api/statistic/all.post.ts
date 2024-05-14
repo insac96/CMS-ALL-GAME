@@ -13,24 +13,24 @@ export default defineEventHandler(async (event) => {
       payment: 0, signin: 0, signup: 0
     }
 
-    for (let i = 0; i < games.length; i++) {
-      const gameData = games[i];
-      const send = await fetch(`${gameData.url}/api/statistic/fast`, {
-        method: 'post',
-        body: JSON.stringify({
-          secret: gameData.secret,
-          ...body
-        }),
-        headers: {'Content-Type': 'application/json'}
-      })
-      const res = await send.json()
-      if(res.code == 200){
-        const data = res.result
-        result.payment = result.payment + data.payment
-        result.signin = result.signin + data.signin
-        result.signup = result.signup + data.signup
-      }
-    }
+    // for (let i = 0; i < games.length; i++) {
+    //   const gameData = games[i];
+    //   const send = await fetch(`${gameData.url}/api/statistic/fast`, {
+    //     method: 'post',
+    //     body: JSON.stringify({
+    //       secret: gameData.secret,
+    //       ...body
+    //     }),
+    //     headers: {'Content-Type': 'application/json'}
+    //   })
+    //   const res = await send.json()
+    //   if(res.code == 200){
+    //     const data = res.result
+    //     result.payment = result.payment + data.payment
+    //     result.signin = result.signin + data.signin
+    //     result.signup = result.signup + data.signup
+    //   }
+    // }
     return resp(event, { result: result }) 
   }
   catch (e:any) {

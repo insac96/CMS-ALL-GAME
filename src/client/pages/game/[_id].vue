@@ -1,6 +1,6 @@
 <template>
-  <UiFlex type="col" class="h-full" v-if="!!game">
-    <!-- <UiFlex class="w-full py-2 px-4">
+  <UiFlex type="col" class="h-full px-4" v-if="!!game">
+    <UiFlex class="w-full py-2">
       <UiFlex type="col" items="start" class="mr-auto cursor-pointer" @click="openLink">
         <UiText class="mr-auto" weight="semibold" color="primary">{{ game.name }}</UiText>
         <UiText color="gray" size="xs">{{ game.url }}</UiText>
@@ -8,10 +8,17 @@
 
       <GameEdit :game="game" class="mx-1" v-if="authStore.profile.username == 'admin'">Sửa</GameEdit>
       <UButton color="gray" icon="i-bx-trash" v-if="authStore.profile.username == 'admin'" @click="del">Xóa</UButton>
-    </UiFlex> -->
+    </UiFlex>
+
+    <UiFlex class="w-full">
+      <UTabs :items="menu" v-model="tab" />
+    </UiFlex>
 
     <div class="w-full grow">
-      {{ game }}
+      <GameViewStatistic v-if="tab == 0" :game="_id" />
+      <GameViewPayment v-if="tab == 1" :game="_id" />
+      <GameViewSpend v-if="tab == 2" :game="_id" />
+      <GameViewLog v-if="tab == 3" :game="_id" />
     </div>
   </UiFlex>
 </template>
@@ -26,7 +33,16 @@ const authStore = useAuthStore()
 const reloadStore = useReloadStore()
 const route = useRoute()
 const _id = route.params._id
+
 const game = ref(null)
+
+const tab = ref(0)
+const menu = [
+  { label: 'Thống kê' },
+  { label: 'Nạp tiền' },
+  { label: 'Chi tiêu' },
+  { label: 'Ghi chép' },
+]
 
 // Watch
 watch(() => reloadStore.state, () => get())
