@@ -25,6 +25,8 @@ export default defineNitroPlugin(async (nitroApp) => {
 
     global.MongoGame.ZUZU = new MongoClient('mongodb://127.0.0.1:27012')
     await global.MongoGame.ZUZU.connect()
+
+    console.log(global.MongoGame)
   }
   catch(e:any){
     throw createError({ statusCode: 500, message: e.toString() })
