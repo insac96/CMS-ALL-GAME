@@ -51,36 +51,36 @@ export default defineEventHandler(async (event) => {
     // Not Total
     if(type != 'total'){
       const match : any = {}
-      match['time'] = { '$gte': new Date(start['$d']), '$lte': new Date(end['$d']) }
+      match['time'] = { $gte: new Date(start['$d']), $lte: new Date(end['$d']) }
 
       payment = await paymentCollection.aggregate([
         {
           $project: {
             createdAt: 1,
             timeformat: {
-              '$dateToString': { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
+              $dateToString: { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
             },
             money: {
-              total: { '$cond': [{ '$eq': ['$status', 1]} , '$money', 0] },
+              total: { $cond: [{$eq: ['$status', 1]} , '$money', 0] },
             }
           }
         },
         {
           $group: {
             _id: '$timeformat',
-            time: { '$min': '$createdAt' },
-            money: { '$sum': '$money.total' },
+            time: { $min: '$createdAt' },
+            money: { $sum: '$money.total' },
           }
         },
         { $match: match }
-      ])
+      ]).toArray()
 
       spend = await spendCollection.aggregate([
         {
           $project: {
             time: 1,
             timeformat: {
-              '$dateToString': { format: format, date: '$time', timezone: 'Asia/Ho_Chi_Minh' }
+              $dateToString: { format: format, date: '$time', timezone: 'Asia/Ho_Chi_Minh' }
             },
             money: 1
           }
@@ -88,12 +88,12 @@ export default defineEventHandler(async (event) => {
         {
           $group: {
             _id: '$timeformat',
-            time: { '$min': '$time' },
-            money: { '$sum': '$money' },
+            time: { $min: '$time' },
+            money: { $sum: '$money' },
           }
         },
         { $match: match }
-      ])
+      ]).toArray()
   
       signin = await userLogLoginCollection.aggregate([
         {
@@ -101,7 +101,7 @@ export default defineEventHandler(async (event) => {
             user: 1,
             createdAt: 1,
             timeformat: {
-              '$dateToString': { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
+              $dateToString: { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
             }
           }
         },
@@ -111,37 +111,37 @@ export default defineEventHandler(async (event) => {
               timeformat: '$timeformat',
               user: '$user'
             },
-            time: { '$min': '$createdAt' },
+            time: { $min: '$createdAt' },
           }
         },
         { $match: match },
         {
           $group: {
             _id: '$_id.timeformat',
-            time: { '$min': '$time' },
-            count: { '$count': {} },
+            time: { $min: '$time' },
+            count: { $count: {} },
           }
         }
-      ])
+      ]).toArray()
   
       signup = await userCollection.aggregate([
         {
           $project: {
             createdAt: 1,
             timeformat: {
-              '$dateToString': { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
+              $dateToString: { format: format, date: '$createdAt', timezone: 'Asia/Ho_Chi_Minh' }
             }
           }
         },
         {
           $group: {
             _id: '$timeformat',
-            time: { '$min': '$createdAt' },
-            count: { '$count': {} },
+            time: { $min: '$createdAt' },
+            count: { $count: {} },
           }
         },
         { $match: match }
-      ])
+      ]).toArray()
     }
 
     // Is Total
@@ -151,19 +151,19 @@ export default defineEventHandler(async (event) => {
         {
           $group: {
             _id: null,
-            money: { '$sum': '$money' },
+            money: { $sum: '$money' },
           }
         }
-      ])
+      ]).toArray()
 
       spend = await spendCollection.aggregate([
         {
           $group: {
             _id: null,
-            money: { '$sum': '$money' },
+            money: { $sum: '$money' },
           }
         }
-      ])
+      ]).toArray()
 
       const users = await userCollection.count()
       signin = [{ count: users }]
