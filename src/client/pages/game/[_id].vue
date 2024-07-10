@@ -19,7 +19,7 @@
       <GameViewPayment v-if="tab == 1" :game="_id" />
       <GameViewSpend v-if="tab == 2" :game="_id" />
       <GameViewUserPayment v-if="tab == 3" :game="_id" />
-      <!-- <GameViewLog v-if="tab == 4" :game="_id" /> -->
+      <GameViewLog v-if="tab == 4" :game="_id" />
     </div>
   </UiFlex>
 </template>

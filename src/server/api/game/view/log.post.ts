@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
           ]
         }
       }
-    ])
+    ]).toArray()
 
     return resp(event, { result: { 
       list: logs[0].list ? logs[0].list : [],
