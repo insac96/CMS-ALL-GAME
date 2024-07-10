@@ -21,9 +21,10 @@ export default defineEventHandler(async (event) => {
     const match : any = {  }
     if(!!search.key){
       if(search.by == 'USER'){
-        const users = await userCollection.find({
-          username : { $regex : search.key.toLowerCase(), $options : 'i' }
-        }).toArray()
+        const users = await userCollection.aggregate([
+          { $match: { username : { $regex : search.key.toLowerCase(), $options : 'i' }}},
+          { $project: { _id: 1 }}
+        ]).toArray()
         
         match['user'] = {
           $in: users.map((i : any) => i._id)
