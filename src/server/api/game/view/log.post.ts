@@ -47,6 +47,7 @@ export default defineEventHandler(async (event) => {
           as: "user"
         }
       },
+      { $unwind: { path: "$user", preserveNullAndEmptyArrays: true }},
       {
         $facet: {
           list: [
