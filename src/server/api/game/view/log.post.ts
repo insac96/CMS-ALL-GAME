@@ -34,16 +34,37 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const list = await logCollection
-    .find(match)
-    .select('user action createdAt')
-    .populate({ path: 'user', select: 'username' })
-    .sort(sorting)
-    .limit(size)
-    .skip((current - 1) * size)
+    const logs = await logCollection.aggregate([
+      { $match: match },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          pipeline: [{
+            $project: { username: 1 }
+          }],
+          as: "user"
+        }
+      },
+      {
+        $facet: {
+          list: [
+            { $sort: sorting },
+            { $skip: (current - 1) * size },
+            { $limit: size },
+          ],
+          pagination: [
+            { $count: "total" }
+          ]
+        }
+      }
+    ])
 
-    const total = await logCollection.count(match)
-    return resp(event, { result: { list, total } })
+    return resp(event, { result: { 
+      list: logs[0].list ? logs[0].list : [],
+      total: logs[0].pagination ? (logs[0].pagination[0] ? logs[0].pagination[0].total : 0) : 0
+    }})
   } 
   catch (e:any) {
     return resp(event, { code: 400, message: e.toString() })

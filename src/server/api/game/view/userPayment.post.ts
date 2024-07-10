@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const list = await paymentCollection
+    const payments = await paymentCollection
     .aggregate([
       { $match: match },
       {
@@ -75,13 +75,24 @@ export default defineEventHandler(async (event) => {
       { $unwind: { path: "$verify_person", preserveNullAndEmptyArrays: true }},
       { $addFields: { "verify_time": "$verify.time" } },
       { $project: { card: 0, qrcode: 0, token: 0, verify: 0, updatedAt: 0 } },
-      { $sort: sorting },
-      { $skip: (current - 1) * size },
-      { $limit: size }
-    ])
+      {
+        $facet: {
+          list: [
+            { $sort: sorting },
+            { $skip: (current - 1) * size },
+            { $limit: size },
+          ],
+          pagination: [
+            { $count: "total" }
+          ]
+        }
+      }
+    ]).toArray()
 
-    const total = await paymentCollection.count(match)
-    return resp(event, { result: { list, total } })
+    return resp(event, { result: { 
+      list: payments[0].list ? payments[0].list : [],
+      total: payments[0].pagination ? (payments[0].pagination[0] ? payments[0].pagination[0].total : 0) : 0
+    }})
   } 
   catch (e:any) {
     return resp(event, { code: 500, message: e.toString() })
