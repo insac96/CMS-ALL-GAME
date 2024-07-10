@@ -18,7 +18,8 @@
       <GameViewStatistic v-if="tab == 0" :game="_id" />
       <GameViewPayment v-if="tab == 1" :game="_id" />
       <GameViewSpend v-if="tab == 2" :game="_id" />
-      <!-- <GameViewLog v-if="tab == 3" :game="_id" /> -->
+      <GameViewUserPayment v-if="tab == 3" :game="_id" />
+      <GameViewLog v-if="tab == 4" :game="_id" />
     </div>
   </UiFlex>
 </template>
@@ -41,7 +42,8 @@ const menu = [
   { label: 'Thống kê' },
   { label: 'Nạp tiền' },
   { label: 'Chi tiêu' },
-  // { label: 'Ghi chép' },
+  { label: 'Chi tiết nạp' },
+  { label: 'Ghi chép' },
 ]
 
 // Watch
